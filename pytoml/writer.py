@@ -87,9 +87,9 @@ def dump(fout, obj, sort_keys=False):
 
     while tables:
         if sort_keys is True:
-            tables.sort(key=lambda tup: tup[0])
+            tables.sort(key=lambda tup: tup[0], reverse=True)
 
-        name, table, is_array = tables.pop(0)
+        name, table, is_array = tables.pop()
         if name:
             section_name = '.'.join(_escape_id(c) for c in name)
             if is_array:
