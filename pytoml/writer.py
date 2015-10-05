@@ -97,7 +97,8 @@ def dump(fout, obj, sort_keys=False):
             else:
                 fout.write('[{}]\n'.format(section_name))
 
-        for k in table:
+        table_keys = sorted(table.keys()) if sort_keys is True else table.keys()
+        for k in table_keys:
             v = table[k]
             if isinstance(v, dict):
                 tables.append((name + (k,), v, False))
