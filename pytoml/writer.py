@@ -8,7 +8,7 @@ if sys.version_info[0] == 3:
 
 def dumps(obj, sort_keys=False):
     fout = io.StringIO()
-    dump(fout, obj, sort_keys)
+    dump(fout, obj, sort_keys=sort_keys)
     return fout.getvalue()
 
 
@@ -86,7 +86,7 @@ def dump(fout, obj, sort_keys=False):
     tables = [((), obj, False)]
 
     while tables:
-        if sort_keys is True:
+        if sort_keys:
             tables.sort(key=lambda tup: tup[0], reverse=True)
 
         name, table, is_array = tables.pop()
@@ -97,7 +97,7 @@ def dump(fout, obj, sort_keys=False):
             else:
                 fout.write('[{}]\n'.format(section_name))
 
-        table_keys = sorted(table.keys()) if sort_keys is True else table.keys()
+        table_keys = sorted(table.keys()) if sort_keys else table.keys()
         for k in table_keys:
             v = table[k]
             if isinstance(v, dict):
